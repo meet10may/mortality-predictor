@@ -1,4 +1,5 @@
+pip-upgrade
 numpy
 pandas
 scikit-learn
-pickle
+pickle5
