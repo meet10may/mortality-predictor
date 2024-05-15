@@ -1,8 +1,7 @@
 import numpy as np
-import pickle
 import streamlit as st
+import pickle
 import pandas as pd
-import sklearn
 
 def load_pickle(filename):
     model = pickle.load(open(filename, 'rb'))
@@ -14,17 +13,18 @@ with st.sidebar:
    st.title("Online calculator for predicting mortality")
    st.write("No input data will be collected from users of this web ARDS mortality prediction tool. It is only meant to make predictions based on the input data.")
 
-def predict(df):
 
-    # model = load_pickle('./model/Random_Forest_Classifier_day_3_with_imputation.pickle')
-    model = pickle.load(open('Random_Forest_Classifier_day_3_with_imputation.pickle','rb'))
-    
-    # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pickle')
-    # st.write(model)
+def predict(df):
+   
+    model = load_pickle('model/Random_Forest_Classifier_day_3_with_imputation.pickle')
+    st.write(model)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
     data = {'probability': prob}
+    # data = jsonify(data)
     return data
+
+
  
 def main():
  # Giving Title
@@ -62,8 +62,7 @@ def main():
         patient_data = {'Gender':[sex],'Age':[age],'Pneumonia':[is_pneumonia],'Bicarbonate':[bicarblevel],'Glucose':[gluclevel],'Albumin':[alblevel],
                         'MAP':[maplevel],'Heart rate':[hrlevel],'Platelets':[pltlevel]}
         df = pd.DataFrame(patient_data)
-        st.write(df)
-        st.write(df.info())
+        
         data = predict(df)
         if data['probability'] < 50:
             st.error("The chance of survival is: {}%".format(data['probability']))
