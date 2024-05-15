@@ -1,7 +1,6 @@
 import numpy as np
 import pickle
 import streamlit as st
-import pickle
 import pandas as pd
 
 
@@ -17,7 +16,7 @@ with st.sidebar:
 
 def predict(df):
 
-    model = load_pickle('model/Random_Forest_Classifier_day_3_with_imputation.pickle')
+    model = load_pickle('./model/Random_Forest_Classifier_day_3_with_imputation.pickle')
     st.write(model)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
