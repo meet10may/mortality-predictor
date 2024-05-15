@@ -1,6 +1,6 @@
 import numpy as np
 import streamlit as st
-import pickle
+import pickle, joblib
 import pandas as pd
 
 def load_pickle(filename):
@@ -16,7 +16,8 @@ with st.sidebar:
 
 def predict(df):
    
-    model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
+    # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
+    model = joblib.load("Random_Forest_Classifier_day_3_with_imputation.pkl")
     # st.write(model)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
