@@ -29,6 +29,7 @@ def predict(df):
 def main():
  # Giving Title
  st.title('Predicting mortality for ARDS')
+ st.title(pickle.format_version)
  st.write("Please fill in the patient’s information (assessed on day 3 after ARDS criteria are met) to compute the probability of mortality (all fields are required)")
  # Getting input data from the user
  with st.form(key='columns_in_form'):
