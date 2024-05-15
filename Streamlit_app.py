@@ -16,7 +16,7 @@ with st.sidebar:
 
 def predict(df):
    
-    model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pickle')
+    model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
     # st.write(model)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
