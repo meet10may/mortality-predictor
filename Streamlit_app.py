@@ -2,7 +2,7 @@ import numpy as np
 import pickle
 import streamlit as st
 import pandas as pd
-
+import sklearn
 
 def load_pickle(filename):
     model = pickle.load(open(filename, 'rb'))
