@@ -63,7 +63,7 @@ def main():
                         'MAP':[maplevel],'Heart rate':[hrlevel],'Platelets':[pltlevel]}
         df = pd.DataFrame(patient_data)
         st.write(df)
-        st.write(df.info)
+        st.write(df.info())
         data = predict(df)
         if data['probability'] < 50:
             st.error("The chance of survival is: {}%".format(data['probability']))
