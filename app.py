@@ -29,7 +29,7 @@ def main():
     with c1:
         st.write("**Patient's Information**")
         age = st.number_input("Age (years):",step =1)
-        sex = st.radio("Sex:",["Male","Female"],horizontal=True)
+        sex = st.radio("Sex:",["Male :man: ","Female :woman:"])
     with c2:
         st.write("**Clinical Information**")
         bicarblevel = st.number_input("Enter Bicarbonate level (mmol/L):",min_value=0.0)
@@ -38,7 +38,7 @@ def main():
         maplevel = st.number_input("Enter Mean airway pressure (cmH20):",min_value=0.0)
         hrlevel = st.number_input("Enter Heart rate(bpm):",min_value=0.0)
         pltlevel = st.number_input("Enter Platelet count(10^9/L):",min_value=0.0)
-        is_pneumonia = st.radio("Pneumonia:",['Yes','No'],horizontal=True)
+        is_pneumonia = st.radio("Pneumonia:",['Yes','No'])
     submitButton = st.form_submit_button(label = 'Make prediction')
      
     if submitButton:
