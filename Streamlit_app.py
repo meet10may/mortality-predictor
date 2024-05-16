@@ -20,7 +20,7 @@ with st.sidebar:
 def predict(df):
    
     # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
-    pkl_path = Path(__file__).parents[1] #/ 'Random_Forest_Classifier_day_3_with_imputation.pkl'
+    pkl_path = Path(__file__).parents[1] / 'blob/main/Random_Forest_Classifier_day_3_with_imputation.pkl'
     dir_list = os.listdir(pkl_path)
     
     st.write(dir_list)
