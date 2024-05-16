@@ -3,7 +3,7 @@ import streamlit as st
 import pickle, joblib
 import pandas as pd
 from pathlib import Path
-
+import os
 
 
 def load_pickle(filename):
@@ -20,8 +20,10 @@ with st.sidebar:
 def predict(df):
    
     # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
-    pkl_path = Path(__file__).parents[1] / 'Random_Forest_Classifier_day_3_with_imputation.pkl'
-    st.write(pkl_path)
+    pkl_path = Path(__file__).parents[1] #/ 'Random_Forest_Classifier_day_3_with_imputation.pkl'
+    dir_list = os.listdir(pkl_path)
+    
+    st.write(dir_list)
     model = joblib.load(pkl_path)
     # st.write(model)
     prob = model.predict_proba(df)
