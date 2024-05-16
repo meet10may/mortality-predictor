@@ -19,9 +19,9 @@ with st.sidebar:
 
 def predict(df):
     pkl_path = Path(__file__).parents[1] / 'mortality-predictor/model/Random_Forest_Classifier_day_3_with_imputation.pkl'
-    model = load_pickle(pkl_path)
+    # model = load_pickle(pkl_path)
     # pkl_path = Path(__file__).parents[1] / 'mortality-predictor/model/Random_Forest_Classifier_day_3_with_imputation.pkl'
-    # model = joblib.load(pkl_path)
+    model = joblib.load(pkl_path)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
     data = {'probability': prob}
