@@ -2,6 +2,9 @@ import numpy as np
 import streamlit as st
 import pickle, joblib
 import pandas as pd
+from pathlib import Path
+
+
 
 def load_pickle(filename):
     model = pickle.load(open(filename, 'rb'))
@@ -17,7 +20,9 @@ with st.sidebar:
 def predict(df):
    
     # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
-    model = joblib.load("Random_Forest_Classifier_day_3_with_imputation.pkl")
+    pkl_path = Path(__file__).parents[1] / 'Random_Forest_Classifier_day_3_with_imputation.pkl'
+    st.write(pkl_path)
+    model = joblib.load(pkl_path)
     # st.write(model)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
