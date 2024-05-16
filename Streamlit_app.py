@@ -20,12 +20,12 @@ with st.sidebar:
 def predict(df):
    
     # model = load_pickle('Random_Forest_Classifier_day_3_with_imputation.pkl')
-    # pkl_path = Path(__file__).parents[1] / 'mortality-predictor/Random_Forest_Classifier_day_3_with_imputation.pkl'
+    pkl_path = Path(__file__).parents[1] / 'mortality-predictor/Random_Forest_Classifier_day_3_with_imputation.pkl'
     # dir_list = os.listdir(pkl_path)
     # st.write(dir_list)
-    # model = joblib.load(pkl_path)
+    model = joblib.load(pkl_path)
     # st.write(model)
-    model = RandomForestClassifier(max_depth=4, max_features='auto', min_samples_leaf=2, min_samples_split=10, random_state=42)
+    # model = RandomForestClassifier(max_depth=4, max_features='auto', min_samples_leaf=2, min_samples_split=10, random_state=42)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
     data = {'probability': prob}
