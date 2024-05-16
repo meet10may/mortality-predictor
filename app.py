@@ -1,33 +1,23 @@
 import numpy as np
 import streamlit as st
-import pickle, joblib
+import joblib
 import pandas as pd
 from pathlib import Path
 import os
 from sklearn.ensemble import RandomForestClassifier
-
-def load_pickle(filename):
-    model = pickle.load(open(filename, 'rb'))
-    return model
-
 
 # Sidebar for Navigation
 with st.sidebar:
    st.title("Online calculator for predicting mortality")
    st.write("No input data will be collected from users of this web ARDS mortality prediction tool. It is only meant to make predictions based on the input data.")
 
-
 def predict(df):
     pkl_path = Path(__file__).parents[1] / 'mortality-predictor/model/Random_Forest_Classifier_day_3_with_imputation.pkl'
-    # model = load_pickle(pkl_path)
-    # pkl_path = Path(__file__).parents[1] / 'mortality-predictor/model/Random_Forest_Classifier_day_3_with_imputation.pkl'
     model = joblib.load(pkl_path)
     prob = model.predict_proba(df)
     prob = np.round(prob[0,0,]*100,2)
     data = {'probability': prob}
     return data
-
-
  
 def main():
  # Giving Title
@@ -49,9 +39,8 @@ def main():
         hrlevel = st.number_input("Enter Heart rate(bpm):",min_value=0.0)
         pltlevel = st.number_input("Enter Platelet count(10^9/L):",min_value=0.0)
         is_pneumonia = st.radio("Pneumonia:",['Yes','No'])
-    
-
     submitButton = st.form_submit_button(label = 'Make prediction')
+     
     if submitButton:
         if sex=='Female': # Male -> 1 and Female -> 2
             sex = 2
@@ -66,12 +55,13 @@ def main():
                         'MAP':[maplevel],'Heart rate':[hrlevel],'Platelets':[pltlevel]}
         df = pd.DataFrame(patient_data)
         
+        # Make prediction based on the model
         data = predict(df)
         if data['probability'] < 50:
             st.error("The chance of survival is: {}%".format(data['probability']))
         else:
             st.success("The chance of survival is: {}%".format(data['probability']))
- 
+            
 if __name__ == '__main__':
  main()
 
